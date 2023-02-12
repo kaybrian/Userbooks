@@ -7,7 +7,8 @@ import RestPasswordComfirm from './containers/RestPasswordConfirm';
 import ResetPassword from './containers/RestPasswordPage';
 import Activate from './containers/Activate';
 import Signup from './containers/Signup';
-
+import { Provider } from 'react-redux';
+import store from './store';
 
 
 const App = () => (
