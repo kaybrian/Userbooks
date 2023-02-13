@@ -65,6 +65,24 @@ export default function (state = initalState, action) {
                 isAuthenticated:false,
                 user:null
             }
+        case actions.PASSWORD_REST_CONFIRM_FAIL:
+            return {
+                ...state
+            }
+        case actions.PASSWORD_REST_CONFIRM_SUCCESS:
+            return {
+
+            }
+
+        case actions.PASSWORD_REST_FAIL:
+            return {
+
+            }
+        case actions.PASSWORD_REST_SUCCESS:
+            return {
+
+            }
+
         default:
             return state
     }

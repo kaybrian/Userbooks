@@ -1,4 +1,3 @@
-import { json } from 'react-router-dom';
 import * as actions from './types'
 import axios from 'axios';
 
@@ -100,6 +99,60 @@ export const login = (email, password) => async dispatch => {
     }
 };
 
+export const rest_password = (email) => async dispatch => {
+    const config = {
+        headers: {
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+        }
+    };
+    const body = JSON.stringify({
+        email
+    })
+
+    try {
+        await axios.post(`${api_url}/auth/users/reset_password/`, body, config);
+
+        dispatch({
+            type:actions.PASSWORD_REST_SUCCESS
+        });
+
+    }catch (err){
+        dispatch({
+            type: actions.PASSWORD_REST_FAIL
+        })
+    }
+
+};
+
+export const rest_password_confirm = (uid, token, new_password, re_new_password) => async dispatch => {
+    const config = {
+        headers: {
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+        }
+    };
+
+    const body = JSON.stringify({
+        uid,
+        token,
+        new_password,
+        re_new_password
+    })
+
+    try {
+        await axios.post(`${api_url}/auth/users/rest_password_confirm/`, body, config);
+
+        dispatch({
+            type:actions.PASSWORD_REST_CONFIRM_SUCCESS
+        });
+
+    }catch (err){
+        dispatch({
+            type: actions.PASSWORD_REST_CONFIRM_FAIL
+        })
+    }
+}
 
 export const logout = () => dispatch => {
     dispatch({
