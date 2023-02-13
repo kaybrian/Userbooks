@@ -1,40 +1,35 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { connect } from 'react-redux';
+import {login} from '../actions/auth';
 
 
-
-const Login = () => {
-    const [formdata, setFormData] = useState({
+const Login = ({login}) => {
+    const [formData, setFormdata] = useState({
         email: "",
         password: ""
-    });
+    })
 
-    const { email, password } = formdata;
+    const { email, password } = formData
 
-    const onchange = e => {
-        setFormData({
-            ...formdata,
-            [e.target.name]: e.target.value
-        })
-    }
+    const onChange = e => setFormdata({
+        ...formData,
+        [e.target.name]: e.target.value
+    })
+
 
     const onSubmit = e => {
         e.preventDefault();
 
-        // login functions
-
-    }
-
-    // is the user Authenticated :
-    // redirect to the home page
+        login(email, password)
+     }
 
     return (
         <div className="container mt-5">
             <h1>Sign In</h1>
             <p>Sign into your account</p>
 
-            <form onSubmit={e => onSubmit(e)}>
+            <form onSubmit={e => onSubmit(e)} className="mt-2">
                 <div className="form-group">
                     <input
                         className="form-control"
@@ -42,39 +37,37 @@ const Login = () => {
                         placeholder="Email"
                         name="email"
                         value={email}
-                        onChange={e => onchange(e)}
+                        onChange={e => onChange(e)}
                         required
                     />
                     <input
-                        className="form-control"
+                        className="form-control mt-3"
                         type="password"
-                        placeholder="password"
+                        placeholder="Password"
                         name="password"
                         value={password}
-                        onChange={e => onchange(e)}
+                        onChange={e => onChange(e)}
                         required
                         minLength={8}
                     />
                 </div>
-                <button className="btn btn-primary" type="submit">
+                <button className="btn btn-primary mt-3" type="submit">
                     Login
                 </button>
             </form>
             <p className="mt-3">
-                Don't have an account? <Link to="/singup" >Sign up</Link>
+                Don't have an account? <Link to="/signup" >Sign up</Link>
             </p>
             <p className="mt-3">
-                Forgot your Password ? <Link to="rest-password">Rest password</Link>
+                Forgot your Password ? <Link to="/reset-password">Rest password</Link>
             </p>
 
         </div>
     )
 };
-
 // const mapStateToProps = state => ({
-//     // pass the authenticated state
+//     //  is Authenticated ?
+// })
 
-// });
 
-
-export default connect(null, {})(Login);
+export default connect(null, {login})(Login);

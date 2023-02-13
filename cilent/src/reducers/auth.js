@@ -1,49 +1,49 @@
-import {
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    USER_LOADED_SUCESS,
-    USER_LOADED_FAIL
-} from '../actions/types';
+import * as actions from '../actions/types'
 
-const initialState = {
+
+
+const initalState = {
     access: localStorage.getItem('access'),
     refresh: localStorage.getItem('refresh'),
     isAuthenticated: null,
     user: null
 }
 
-export default function (state = initialState, action) {
+
+export default function (state = initalState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case LOGIN_SUCCESS:
+        case actions.LOGIN_SUCCESS:
             localStorage.setItem('access', payload.access)
             return {
                 ...state,
-                isAuthenticated: true,
-                access: payload.access,
-                refresh: payload.refresh
+                isAuthenticated:true,
+                access:payload.access,
+                refresh:payload.refresh
             }
-        case USER_LOADED_SUCESS:
+
+        case actions.USER_LOADED_SUCCESS:
             return {
                 ...state,
                 user:payload
             }
-        case USER_LOADED_FAIL:
+
+        case actions.USER_LOADED_FAILED:
             return {
                 ...state,
                 user:null
             }
-        case LOGIN_FAIL:
-            localStorage.removeItem('access')
-            localStorage.removeItem('refresh')
+
+        case actions.LOGIN_FAILED:
+            localStorage.removeItem('access');
+            localStorage.removeItem('refresh');
             return {
                 ...state,
                 access:null,
                 refresh:null,
                 isAuthenticated:false,
                 user:null
-
             }
         default:
             return state
