@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { logout } from "../actions/auth";
+import { connect } from "react-redux";
+
 
 const Navbar = () => {
+    const gustLinks = () => {
+
+    }
+    const authLinks = () => {
+
+    }
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -31,4 +40,4 @@ const Navbar = () => {
 };
 
 
-export default Navbar;
+export default connect(null, {logout})(Navbar);
