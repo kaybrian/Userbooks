@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { rest_password } from "../actions/auth";
 
 const RestPassword = ({rest_password}) => {
-    const {requestSent, setRequestSent } = useState(false)
+    const [requestSent, setRequestSent ] = useState(false)
 
     const [formData, setFormdata] = useState({
         email: "",
@@ -24,9 +24,10 @@ const RestPassword = ({rest_password}) => {
         rest_password(email);
 
         setRequestSent(true);
+
      }
 
-     if (requestSent){
+    if (requestSent){
         return <Navigate to="/" />;
      }
 

@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate,useParams } from "react-router-dom";
 import { connect } from 'react-redux';
 import { rest_password_confirm } from "../actions/auth";
 
 const RestPasswordComfirm = ({ match, rest_password_confirm }) => {
-    const { requestSent, setRequestSent } = useState(false)
+    const [requestSent, setRequestSent] = useState(false)
+
+    const {uid, token} = useParams();
 
     const [formData, setFormdata] = useState({
         new_password: "",
-        re_new_password:""
+        re_new_password: ""
     })
 
-    const { new_password,re_new_password } = formData
+    const { new_password, re_new_password } = formData
 
     const onChange = e => setFormdata({
         ...formData,
@@ -22,8 +24,8 @@ const RestPasswordComfirm = ({ match, rest_password_confirm }) => {
     const onSubmit = e => {
         e.preventDefault();
 
-        const uid = match.params.uid;
-        const token = match.params.token;
+        console.log(uid + token)
+        // const token = match.params.token;
         rest_password_confirm(uid, token, new_password, re_new_password);
         setRequestSent(true);
     }
