@@ -24,8 +24,6 @@ const RestPasswordComfirm = ({ match, rest_password_confirm }) => {
     const onSubmit = e => {
         e.preventDefault();
 
-        console.log(uid + token)
-        // const token = match.params.token;
         rest_password_confirm(uid, token, new_password, re_new_password);
         setRequestSent(true);
     }

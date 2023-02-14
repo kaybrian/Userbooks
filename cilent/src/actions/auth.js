@@ -184,6 +184,33 @@ export const user_sign_up = (name, email, password, re_password) => async dispat
 
 }
 
+export const user_verify = (uid, token) => async dispatch => {
+    const config = {
+        headers: {
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+        }
+    };
+    const body = JSON.stringify({
+        uid,
+        token,
+    })
+
+    try {
+        await axios.post(`${api_url}/auth/users/activation/`, body, config);
+
+        dispatch({
+            type: actions.USER_VERIFY_SUCCESS
+        });
+
+    } catch (err) {
+        dispatch({
+            type: actions.USER_VERIFY_FAILED
+        })
+    }
+
+}
+
 export const logout = () => dispatch => {
     dispatch({
         type: actions.LOGOUT
