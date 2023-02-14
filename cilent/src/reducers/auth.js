@@ -17,41 +17,41 @@ export default function (state = initalState, action) {
         case actions.AUTHENTICATED_SUCCESS:
             return {
                 ...state,
-                isAuthenticated:true
+                isAuthenticated: true
             }
         case actions.LOGIN_SUCCESS:
             localStorage.setItem('access', payload.access)
             return {
                 ...state,
-                isAuthenticated:true,
-                access:payload.access,
-                refresh:payload.refresh
+                isAuthenticated: true,
+                access: payload.access,
+                refresh: payload.refresh
             }
 
         case actions.USER_LOADED_SUCCESS:
             return {
                 ...state,
-                user:payload
+                user: payload
             }
 
         case actions.USER_LOADED_FAILED:
             return {
                 ...state,
-                user:null
+                user: null
             }
         case actions.AUTHENTICATED_FAILED:
-            return{
+            return {
                 ...state,
-                isAuthenticated:false
+                isAuthenticated: false
             }
         case actions.LOGOUT:
             localStorage.removeItem('access');
-            localStorage.removeItem('refresh');return {
+            localStorage.removeItem('refresh'); return {
                 ...state,
-                access:null,
-                refresh:null,
-                isAuthenticated:false,
-                user:null
+                access: null,
+                refresh: null,
+                isAuthenticated: false,
+                user: null
             }
 
 
@@ -60,16 +60,24 @@ export default function (state = initalState, action) {
             localStorage.removeItem('refresh');
             return {
                 ...state,
-                access:null,
-                refresh:null,
-                isAuthenticated:false,
-                user:null
+                access: null,
+                refresh: null,
+                isAuthenticated: false,
+                user: null
             }
         case actions.PASSWORD_REST_CONFIRM_FAIL:
             return {
                 ...state
             }
         case actions.PASSWORD_REST_CONFIRM_SUCCESS:
+            return {
+
+            }
+        case actions.USER_SIGNUP_SUCCESS:
+            return {
+
+            }
+        case actions.USER_SIGNUP_FAIL:
             return {
 
             }

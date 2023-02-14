@@ -114,10 +114,10 @@ export const rest_password = (email) => async dispatch => {
         await axios.post(`${api_url}/auth/users/reset_password/`, body, config);
 
         dispatch({
-            type:actions.PASSWORD_REST_SUCCESS
+            type: actions.PASSWORD_REST_SUCCESS
         });
 
-    }catch (err){
+    } catch (err) {
         dispatch({
             type: actions.PASSWORD_REST_FAIL
         })
@@ -144,14 +144,44 @@ export const rest_password_confirm = (uid, token, new_password, re_new_password)
         await axios.post(`${api_url}/auth/users/reset_password_confirm/`, body, config);
 
         dispatch({
-            type:actions.PASSWORD_REST_CONFIRM_SUCCESS
+            type: actions.PASSWORD_REST_CONFIRM_SUCCESS
         });
 
-    }catch (err){
+    } catch (err) {
         dispatch({
             type: actions.PASSWORD_REST_CONFIRM_FAIL
         })
     }
+}
+
+
+export const user_sign_up = (name, email, password, re_password) => async dispatch => {
+    const config = {
+        headers: {
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+        }
+    };
+    const body = JSON.stringify({
+        name,
+        email,
+        password,
+        re_password
+    })
+
+    try {
+        await axios.post(`${api_url}/auth/users/`, body, config);
+
+        dispatch({
+            type: actions.USER_SIGNUP_SUCCESS
+        });
+
+    } catch (err) {
+        dispatch({
+            type: actions.USER_SIGNUP_FAIL
+        })
+    }
+
 }
 
 export const logout = () => dispatch => {
